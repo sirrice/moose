@@ -7,7 +7,7 @@ from django.db.models import F
 
 
 def home(request):
-    pass
+    return feedback(request)
 
 def feedback(request):
-    return render_to_response('feedback.html')
+    return render_to_response('feedback.html', {}, context_instance=RequestContext(request))

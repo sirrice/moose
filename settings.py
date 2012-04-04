@@ -1,5 +1,5 @@
 import os
-ROOT_PATH = os.path.dirname(__file__)
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 try:
     from private_settings import *
 except:
@@ -107,7 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'moose.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = TEMPLATE_DIRS or (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -116,6 +116,7 @@ TEMPLATE_DIRS = TEMPLATE_DIRS or (
 )
 
 INSTALLED_APPS = (
+    'moose',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -126,6 +127,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+
 )
 
 # A sample logging configuration. The only tangible logging
@@ -150,7 +152,4 @@ LOGGING = {
         },
     }
 }
-
-
-
 
