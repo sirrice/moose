@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from emailusernames.forms import EmailAuthenticationForm
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -7,14 +8,12 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'moose.views.home', name='home'),
+    url(r'^moose/a/', include('registration.backends.email.urls')),
     url(r'^moose/', include('moose.urls')),
-
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    (r'^login/$', 'django.contrib.auth.views.login', {'authentication_form': EmailAuthenticationForm}, name='login'),
-    (r'^signup/$', 'moose.views.signup', name='signup'),
     # url(r'^admin/$', include(admin.site.urls)),
 )

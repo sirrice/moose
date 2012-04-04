@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class Feedback(models.Model):
-    sender = models.ForeignKey(User)
-    receiver = models.ForeignKey(User)
+    sender = models.ForeignKey(User, related_name='feedback_sender')
+    receiver = models.ForeignKey(User, related_name='feedback_receiver')
 
 class Message(models.Model):
     thread = models.ForeignKey(Feedback)

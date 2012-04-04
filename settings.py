@@ -6,13 +6,18 @@ except:
     pass
 
 # Django settings for moose project.
-print "hi"
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+# For 'registration' app (verified registration)
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = 'localhost'
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+LOGIN_REDIRECT_URL = '/'
 
 DATABASES = DATABASES or {
     'default': {
@@ -116,6 +121,7 @@ TEMPLATE_DIRS = TEMPLATE_DIRS or (
 )
 
 INSTALLED_APPS = (
+    'registration',
     'emailusernames',
     'moose',
     'django.contrib.auth',

@@ -4,10 +4,10 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('moose.views',
+urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'home', name='home'),
-    url(r'^feedback/$', 'feedback', name='feedback'),
+    url(r'^$', 'moose.views.home', name='home'),
+    url(r'^feedback/$', 'moose.views.feedback', name='feedback'),
     # url(r'^moose/', include('moose.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
