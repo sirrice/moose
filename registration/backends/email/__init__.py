@@ -2,6 +2,8 @@ from django.conf import settings
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 
+from emailusernames.forms import EmailUserCreationForm
+
 from registration import signals
 from registration.forms import RegistrationForm
 from registration.models import RegistrationProfile
@@ -120,7 +122,7 @@ class EmailBackend(object):
         Return the default form class used for user registration.
         
         """
-        return RegistrationForm
+        return EmailUserCreationForm
 
     def post_registration_redirect(self, request, user):
         """

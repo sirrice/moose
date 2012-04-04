@@ -10,6 +10,8 @@ from django.db import transaction
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+from emailusernames.utils import create_user,
+
 try:
     from django.utils.timezone import now as datetime_now
 except ImportError:
@@ -75,7 +77,8 @@ class RegistrationManager(models.Manager):
         user. To disable this, pass ``send_email=False``.
         
         """
-        new_user = User.objects.create_user(username, email, password)
+#        new_user = User.objects.create_user(username, email, password)
+        new_user = create_user(email, password)
         new_user.is_active = False
         new_user.save()
 
