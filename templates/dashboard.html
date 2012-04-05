@@ -2,6 +2,45 @@
 
 {% block content %}
 
+<div class="row">
+
+<div class="span6">
+	<h2 class="col">Open Questions</h2>
+
+	{% for q in user.question_set.all %}
+	<div class="row" style="margin-bottom: 1em">
+		<div class="span4">
+			<a href="/moose/question/{{q.pk}}">{{q.question}}</a>
+			<div class="metadata">asked on: {{q.date}}</div>
+		</div>
+		<div class="span2" style="text-align: right;">
+			no replies
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+
+<div class="span6">
+
+	<h2 class="col">Add a question</h2>
+	<form  class="form-horizontal" id="addqform" action="/moose/question/" method='post'>
+	{% csrf_token %}
+	<fieldset>
+	<div class="control"><input type="text" name="question"/></div>
+	<div><textarea name="text" rows="5" cols="50"/>Any extra details or clarifications here</textarea></div>
+	<div><input type="text" name="shortname"/></div>
+	<input type="submit" class="btn" value="Preview"/>
+	</fieldset>
+	</form>
+
+</div>
+<style>
+#addqform input, #addqform textarea { width: 98%; font-size: 15pt;}
+</style>
+
+</div>
+<!--
 <div id="left">
 <h2 class="col">Open Questions</h2>
 
@@ -27,11 +66,7 @@
 		last updated: 4 Apr 2012. asked on: 4 Apr 2012
 	</div>
 	
-	{% for q in user.question_set.all %}
-	<div>
-	<a href="/moose/question/{{q.pk}}/">Question {{ q.pk}}</a>
-	</div>
-	{% endfor %}
+
 	
 </div>
 
@@ -40,6 +75,8 @@
 </div>
 
 <div id="right">
+-->
+<!--
 <h2 class="col">Ask a New Question</h2>
 
 <form name="ask">
@@ -50,10 +87,8 @@
 <input type="button" name="preview" value="Preview">
 </form>
 
-<h1><a href="/moose/question/">Add Question</a></h1>
-
 <br/>
-
+-->
 
 </div>
 

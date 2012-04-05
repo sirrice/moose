@@ -13,7 +13,7 @@ class AddQuestionForm(forms.ModelForm):
              raise forms.ValidationError("We only allow lowercase letters, numbers, -, and _ in our URLs.")
          try:
              q = Question.objects.get(shortname = sname)
-         except:
+         except: # XXX: should only catch itemnotfound exceptions
              q = None
          if q:
              raise forms.ValidationError("That name is already in use.  Try another?")
@@ -32,7 +32,7 @@ class AddSenderForm(forms.ModelForm):
 
     def clean(self):
         cd = super(AddSenderForm, self).clean()
-
+        print cd
         email = cd['email'].strip()
         if email:
             try:

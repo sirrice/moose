@@ -2,44 +2,31 @@
 
 {% block content %}
 
-[name] asked:
-<br/>
-<div class="bigq">
-	How is my CHI 2012 talk?
-</div>
-<div class="smallq">
-	Any feedback welcome: high-level approach to work, specific questions, methodology, slide design, etc. Thanks!
-</div>
+
+{% include 'snippets/question.html' %}
 
 
-<br/><br/>
+
+<div>
 Instructions to anonymous responder here.
 <br/>
 Keep it polite, constructive, etc.
 <br/>
 Explanation of process?
-<br/><br/>
-<center>
-<textarea rows="10" cols="100" name="feedback">Feedback goes here!</textarea>
-</center>
-
-<br/><br/>
-
-<input type="button" value="Preview Feedback"/>
-
 </div>
 
 
-<form action="/moose/feedback/{{q.pk}}/" method="post">
+<form class="form-horizontal" action="/moose/feedback/{{q.pk}}/" method="post">
 {% csrf_token %}
 <p>Dear {{ q.user.email }},</p>
-<p>In response to your question, <span class='question'>{{ q.question }}</span></p>
-<p><textarea rows=5 cols=60 name="text"></textarea></p>
-<p>Best regards, <input name="sender_name" /></p>
-<input type="hidden" name="from_sender" value="1" />
-<p><input type="submit" value="Send"/></p>
+<div><textarea rows=10 name="f-text">Feedback goes here!</textarea></div>
+<p>Best regards, {{ sform.email }}</p>
+<p><input class="btn" type="submit" value="Preview Feedback"/></p>
 
 </form>
+<style>
+form textarea { width: 98%; font-size: 15pt;}
+</style>
 
 {{ form.errors }}
 

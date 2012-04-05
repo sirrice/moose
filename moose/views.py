@@ -8,37 +8,63 @@ from django.db.models import F
 from forms import *
 from django.contrib import messages
 
-def dashboard(request):
-    return render_to_response('dashboard.html',
-                              {'user' : request.user},
-                              context_instance=RequestContext(request))
 
 def home(request):
+    if request.user.is_authenticated():
+        qform = AddQuestionForm()            
+        return render_to_response('dashboard.html',
+                                  {'user' : request.user,
+                                  'form' : qform},
+                                  context_instance=RequestContext(request))
+    
+
     return render_to_response('index.html',
                               {'user' : request.user},
                               context_instance=RequestContext(request))
 
+
 def feedback(request, shortname):
     try:
         q = Question.objects.get(shortname=shortname)
-    except:
-        messages.error(request, "couldn't find the question you are giving feedback to")
-        q = None
+    except Exception as e:
+        print e
+        try:
+            q = Question.objects.get(pk=int(shortname))         # maybe its an id!
+        except Exception as e:
+            print e
+            messages.error(request, "couldn't find the question you are giving feedback to")
+            return HttpResponseRedirect('/')
 
     if request.method == 'POST' and q:
         post = dict(request.POST)
         post['question'] = q.pk
-        form = AddFeedbackForm(post)
-        if form.is_valid():
-            form.save()
+        print post
+        fform = AddFeedbackForm(post, prefix='f')
+        sform = AddSenderForm(post, prefix='s')
+        mform = AddMessageForm(post, prefix='m')
+
+        if sform.is_valid() and fform.is_valid() and mform.is_valid():
+            s = sform.save(commit=False)
+            f = fform.save(commit=False)
+            m = mform.save(commit=False)
+            f.sender = s
+            m.feedback = f
+            s.save()
+            f.save()
+            m.save()
             messages.success(request, "added feedback successfully!")
         else:
             messages.error(request, "did not validate form correctly")
     else:
-        form = AddFeedbackForm({'question' : q})
+        fform = AddFeedbackForm({'question' : q}, prefix='f')
+        sform = AddSenderForm(prefix='s')
+        mform = AddMessageForm(prefix='m')
     return render_to_response('feedback.html',
-                              {'form' : form,
-                               'q' : q },
+                              {'fform' : fform,
+                               'sform' : sform,
+                               'mform' : mform,
+                               'q' : q,
+                               'user' : request.user },
                               context_instance=RequestContext(request))
 
 @login_required
