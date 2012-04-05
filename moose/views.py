@@ -14,6 +14,8 @@ def dashboard(request):
                               context_instance=RequestContext(request))
 
 def home(request):
+    if request.user:
+        return dashboard(request)
     return render_to_response('index.html',
                               {'user' : request.user},
                               context_instance=RequestContext(request))
@@ -21,13 +23,19 @@ def home(request):
 def feedback(request, shortname):
     try:
         q = Question.objects.get(shortname=shortname)
-    except:
-        messages.error(request, "couldn't find the question you are giving feedback to")
-        q = None
+    except Exception as e:
+        print e
+        try:
+            q = Question.objects.get(pk=int(shortname))         # maybe its an id!
+        except Exception as e:
+            print e
+            messages.error(request, "couldn't find the question you are giving feedback to")
+            return home(request)
 
     if request.method == 'POST' and q:
         post = dict(request.POST)
         post['question'] = q.pk
+        print post
         fform = AddFeedbackForm(post, prefix='f')
         sform = AddSenderForm(post, prefix='s')
         mform = AddMessageForm(post, prefix='m')

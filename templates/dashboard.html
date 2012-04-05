@@ -29,7 +29,15 @@
 	
 	{% for q in user.question_set.all %}
 	<div>
-	<a href="/moose/question/{{q.pk}}/">Question {{ q.pk}}</a>
+	<div class="q">
+		<a href="/moose/question/{{q.pk}}">{{q.question}}</a>
+	</div>
+	<div class="counter">
+		no<br>replies
+	</div>
+	<div class="metadata">
+		asked on: {{q.date}}
+	</div>
 	</div>
 	{% endfor %}
 	

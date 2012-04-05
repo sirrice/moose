@@ -3,7 +3,7 @@ from django.db import models
 
 import re
 
-SHORTNAME_PATTERN = "^[a-z\-\_1-9]+$"
+SHORTNAME_PATTERN = "^[a-z\-\_1-9]+"
 SHORTNAME_REGEX = re.compile(SHORTNAME_PATTERN)
 class Question(models.Model):
     user = models.ForeignKey(User)
