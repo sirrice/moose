@@ -12,7 +12,6 @@
 	
 	<script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script> 
 	
-	<!--<link rel="stylesheet" href="/style.css" />-->
 	<title>{% block title %}User test{% endblock %}</title>
 </head>
 
@@ -20,16 +19,6 @@
 
     <div id="header">
         {% block header %}
-            {% if not hide_toolbar %}
-                <a href="/moose/">Home</a>
-            	{% if user.is_authenticated %}
-            	{% trans "Logged in" %}: {{ user.username }} 
-            	(<a href="{% url auth_logout %}?next=/">{% trans "Log out" %}</a> | 
-            	<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
-            	{% else %}
-            	<a href="{% url auth_login %}?next=/">{% trans "Log in" %}</a>
-            	{% endif %}
-            {% endif %}
         {% endblock %}
         &nbsp;                    
     </div>
@@ -38,17 +27,50 @@
     <div class="span1">&nbsp;</div>
     <div class="span12">
 
-	<h1>Anonymoose</h1>
+	<div class="row">
+		<div class="span12">
+			<h1>Anonymoose</h1>
+			<span style="float:right;">
+				{% if not hide_toolbar %}
+					<a href="/moose/">Home</a>
+					{% if user.is_authenticated %}
+						| {% trans "Logged in" %}: {{ user.username }} 
+					{% endif %}
+				{% endif %}
+			</span>
+		</div>
+	</div>
 	
 	<hr>
+	
+	<div class="row" style="text-align:right;">
+		<div class="span12">
+		{% if not hide_toolbar %}
+			{% if user.is_authenticated %}
+				(<a href="{% url auth_logout %}?next=/">{% trans "Log out" %}</a> | 
+				<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
 
-    <div id="contentold">
+			{% endif %}
+		{% endif %}
+		</div>
+	</div>
+
+    <div id="contentold" style="padding-top:30px; padding-bottom:30px;">
         {% block content %}{% endblock %}
     </div>
 
 	<hr>
+	<div class="row" style="text-align:right;">
+		<div class="span12">
+			<div id="footer">
+				{% include 'footer.html' %}
+			</div>
+		</div>
+	</div>
 
-    {% if messages %}
+
+<!--    
+	{% if messages %}
     <div>
     <ul class="messages">
         {% for message in messages %}
@@ -57,15 +79,16 @@
     </ul>
     </div>
     {% endif %}
+-->
         
-	</div>
+	</div><!--end span12-->
+	
     <div class="span1">&nbsp;</div>
 
-    <div id="footer">
-        {% block footer %}
-        <hr />
-        {% endblock %}
-    </div>
+	</div><!--close row-->
+
+<div class="row" style="padding:40px;">&nbsp;</div>
+
 </body>
 
 </html>

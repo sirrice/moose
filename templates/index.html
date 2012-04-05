@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -7,20 +8,23 @@
 function register()
 {
 	//replace signin / register buttons with sign up fields
-	$signup = 'Confirm Password<br/>'
-		+ '<input type="password" size="30" name="pwd2"/>'
-		+ '<br/><br/>'
-		+ 'Name<br/>'
-		+ '<input type="text" size="30" name="fullname"/>'
-		+ '<br/><br/>'
-		+ '<input type="button" name="signup" value="Sign Up"/>';
+	$signup = '<form method="post" name="signup" action="{% url registration_register %}">'
+	+ "{% csrf_token %}"
+	+ '<p><label for="id_email">Email:</label> <input id="id_email" type="text" name="email" maxlength="70" /></p>'
+	+ '<p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p>'
+	+ '<p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /></p>'
+	+ '<p><label for="id_fullname">Name:</label> <input type="text" name="fullname" id="id_fullname" /></p>'
+	+ '<input type="submit" name="signup" value="Register"/>'
+	+ '</form>';
 	
-	$('span#signin').empty().html($signup);	
+	$('span#formspan').empty().html($signup);	
 }
 
 </script>
 
-<div id="ileft">
+<div class="row">
+
+<div class="span7">
 <h2 class="col">1. Pose a question</h2>
 <p class="inst">
 	one-off: "What do you think of this talk?",
@@ -40,33 +44,32 @@ function register()
 <br/>
 </div>
 
-<div id="imiddle">
-	&nbsp;
-</div>
+<div class="span1">&nbsp;</div>
 
-<div id="iright">
+<div class="span4">
 <h2>Sign in</h2>
 <br/>
 
-<form name="signup">
+<span id="formspan">
 
-E-mail<br/>
-<input type="text" size="30" name="email"/>
-<br/><br/>
-Password<br/>
-<input type="password" size="30" name="pwd1"/>
-<br/><br/>
+<form method="post" name="signup" action="{% url django.contrib.auth.views.login %}">
+{% csrf_token %}
 
-<span id="signin">
-<input type="button" name="signin" value="Sign In"> <a href="">(forgot password?)</a>
-<br/><br/>
-Not a member? <a href="#" onClick="register()">Register</a>
-</span>
+<p><label for="id_email">Email:</label> <input id="id_email" type="text" name="email" maxlength="70" /></p>
 
+<p><label for="id_password">Password:</label> <input type="password" name="password" id="id_password" /></p>
+
+<input type="submit" value="{% trans 'Log in' %}" /> <a href="{% url auth_password_reset %}">{% trans "Forgot password?" %}</a>
+<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}/{%endif%}" />
+  
 </form>
+
+<p>{% trans "Not a member" %}? <a href="#" onClick="register()">Register</a>!</p>
+
+</span>
 
 </div>
 
-<div style="clear:both;"></div>
+</div><!--end row-->
 
 {% endblock %}
