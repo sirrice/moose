@@ -16,7 +16,7 @@ Explanation of process?
 </div>
 
 
-<form class="form-horizontal" action="/moose/feedback/{{q.pk}}/" method="post">
+<form class="form-horizontal" action="/{{q.pk}}/" method="post">
 {% csrf_token %}
 <p>Dear {{ q.user.email }},</p>
 <div><textarea rows=10 name="f-text">Feedback goes here!</textarea></div>
