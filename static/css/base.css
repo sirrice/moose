@@ -5,6 +5,12 @@ html, body, div, p, table{
 	color: #444
 }
 
+#header {
+	height: 1em;
+	border-bottom: color: #eee;
+	margin-bottom: 30px;
+}
+
 h1 { font-family: 'Monsieur La Doulaise', cursive; font-size:65px; font-weight:400; line-height: 60px;	margin-bottom:0px;}
 
 h2 { font-family: Quicksand, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:400; font-size:20px; margin:0px;}

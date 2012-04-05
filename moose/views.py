@@ -19,7 +19,8 @@ def home(request):
     
 
     return render_to_response('index.html',
-                              {'user' : request.user},
+                              {'user' : request.user,
+                               'hide_toolbar' : True},
                               context_instance=RequestContext(request))
 
 
@@ -38,10 +39,12 @@ def feedback(request, shortname):
     if request.method == 'POST' and q:
         post = dict(request.POST)
         post['question'] = q.pk
-        print post
+
         fform = AddFeedbackForm(post, prefix='f')
         sform = AddSenderForm(post, prefix='s')
         mform = AddMessageForm(post, prefix='m')
+        print sform.data
+        sform.is_valid()
 
         if sform.is_valid() and fform.is_valid() and mform.is_valid():
             s = sform.save(commit=False)
@@ -64,7 +67,8 @@ def feedback(request, shortname):
                                'sform' : sform,
                                'mform' : mform,
                                'q' : q,
-                               'user' : request.user },
+                               'user' : request.user,
+                               'hide_toolbar' : True },
                               context_instance=RequestContext(request))
 
 @login_required
