@@ -8,13 +8,13 @@
 function register()
 {
 	//replace signin / register buttons with sign up fields
-	$signup = '<form method="post" name="signup" action="/accounts/register/">'
+	$signup = '<form method="post" name="signup" action="{% url registration_register %}">'
 	+ "{% csrf_token %}"
 	+ '<p><label for="id_email">Email:</label> <input id="id_email" type="text" name="email" maxlength="70" /></p>'
 	+ '<p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p>'
 	+ '<p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /></p>'
 	+ '<p><label for="id_fullname">Name:</label> <input type="text" name="fullname" id="id_fullname" /></p>'
-	+ '<input type="button" name="signup" value="Register"/>'
+	+ '<input type="submit" name="signup" value="Register"/>'
 	+ '</form>';
 	
 	$('span#formspan').empty().html($signup);	
