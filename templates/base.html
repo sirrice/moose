@@ -60,8 +60,17 @@
     </div>
 
 	<hr>
+	<div class="row" style="text-align:right;">
+		<div class="span12">
+			<div id="footer">
+				{% include 'footer.html' %}
+			</div>
+		</div>
+	</div>
 
-    {% if messages %}
+
+<!--    
+	{% if messages %}
     <div>
     <ul class="messages">
         {% for message in messages %}
@@ -70,6 +79,7 @@
     </ul>
     </div>
     {% endif %}
+-->
         
 	</div><!--end span12-->
 	
@@ -77,13 +87,8 @@
 
 	</div><!--close row-->
 
-	<div class="row" style="text-align:right;">
-		<div class="span12">
-		<div id="footer">
-			{% include 'footer.html' %}
-		</div>
-		</div>
-	</div>
+<div class="row" style="padding:40px;">&nbsp;</div>
+
 </body>
 
 </html>

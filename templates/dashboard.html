@@ -23,14 +23,29 @@
 
 <div class="span6">
 
-	<h2 class="col">Add a question</h2>
-	<form  class="form-horizontal" id="addqform" action="/moose/question/" method='post'>
+	<h2 class="col">Ask a Question</h2>
+	
+	<br/>
+	
+	<form class="form-horizontal" id="addqform" action="/moose/question/" method='post'>
 	{% csrf_token %}
 	<fieldset>
+	<label for="question">Question:</label>
 	<div class="control"><input type="text" name="question"/></div>
-	<div><textarea name="text" rows="5" cols="50"/>Any extra details or clarifications here</textarea></div>
-	<div><input type="text" name="shortname"/></div>
-	<input type="submit" class="btn" value="Preview"/>
+	
+	<br/>
+	
+	<label for="text">Extra description or clarification:</label>
+	<div><textarea name="text" rows="4" cols="50"/></textarea></div>
+	
+	<br/>
+	
+	<label for="shortname">URL to link to:</label>
+	<div>fd.bk/<input style="width:200px" type="text" name="shortname" size="20"/></div>
+	
+	<br/>
+	
+	<input type="submit" class="btn" value="Preview Question"/>
 	</fieldset>
 	</form>
 
