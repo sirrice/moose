@@ -24,7 +24,7 @@ class Sender(models.Model):
     status = models.CharField(max_length=6, choices=SENDER_STATUSES)
 
 class Feedback(models.Model):
-    sender = models.ForeignKey(User, null=True)
+    sender = models.ForeignKey(User)
     question = models.ForeignKey(Question)
 
 class Message(models.Model):
