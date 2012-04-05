@@ -3,17 +3,14 @@
 {% block content %}
 
 
-{{q.user.email}} asked:
-<br/>
-<div class="bigq">
-	{{q.question}}
-</div>
-<div class="smallq">
-	{{q.text}}
-</div>
 
-{% for f in q.feedback_set.all %}
-<div>{{f.text}}</div>
-{% endfor %}
+{% include 'snippets/question.html' %}
+
+{% if q.feedback_set.all.count %}
+	<h2>Responses</h2>
+	{% for f in q.feedback_set.all %}
+	<div>{{f.text}}</div>
+	{% endfor %}
+{% endif %}
 
 {% endblock %}

@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     url(r'^$', 'moose.views.home', name='home'),
     url(r'^question/$', 'moose.views.question', name='question'),
     url(r'^question/(\w+)/$', 'moose.views.question', name='question'),
-    url(r'^dashboard/$', 'moose.views.dashboard', name='dashboard'),    
     # url(r'^moose/', include('moose.foo.urlsax')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

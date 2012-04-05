@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/base.css" type="text/css">
 	
 	<link href='http://fonts.googleapis.com/css?family=Monsieur+La+Doulaise' rel='stylesheet' type='text/css'>
@@ -22,36 +23,41 @@
     <a href="/moose/">Home</a>
 	{% if user.is_authenticated %}
 	{% trans "Logged in" %}: {{ user.username }} 
-	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
+	(<a href="{% url auth_logout %}?next=/">{% trans "Log out" %}</a> | 
 	<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
 	{% else %}
-	<a href="{% url auth_login %}">{% trans "Log in" %}</a>
+	<a href="{% url auth_login %}?next=/">{% trans "Log in" %}</a>
 	{% endif %}
 	<hr />
         {% endblock %}
     </div>
 
-	<div id="main">
-	
+	<div class="row">
+    <div class="span1">&nbsp;</div>
+    <div class="span12">
+
 	<h1>Anonymoose</h1>
 	
 	<hr>
 
-    <div id="content">
+    <div id="contentold">
         {% block content %}{% endblock %}
     </div>
 
 	<hr>
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-    
+    {% if messages %}
+    <div>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
+        
 	</div>
+    <div class="span1">&nbsp;</div>
 
     <div id="footer">
         {% block footer %}

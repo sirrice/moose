@@ -3,38 +3,30 @@
 {% block content %}
 
 
-<br/>
-<div class="email">
-{{ q.user.email }}
-</div>
-
-<div class="bigq">
-	{{ q.question }}
-</div>
-<div class="smallq">
-	{{ q.text }}
-</div>
+{% include 'snippets/question.html' %}
 
 
-<br/><br/>
+
+<div>
 Instructions to anonymous responder here.
 <br/>
 Keep it polite, constructive, etc.
 <br/>
 Explanation of process?
-<br/><br/>
+</div>
 
 
-<form action="/moose/feedback/{{q.pk}}/" method="post">
+<form class="form-horizontal" action="/moose/feedback/{{q.pk}}/" method="post">
 {% csrf_token %}
 <p>Dear {{ q.user.email }},</p>
-<p>In response to your question, <span class='question'>{{ q.question }}</span></p>
-<p><textarea rows=10 cols=100 name="f-text">Feedback goes here!</textarea></p>
+<div><textarea rows=10 name="f-text">Feedback goes here!</textarea></div>
 <p>Best regards, {{ sform.email }}</p>
-<p><input type="submit" value="Preview Feedback"/></p>
+<p><input class="btn" type="submit" value="Preview Feedback"/></p>
 
 </form>
-
+<style>
+form textarea { width: 98%; font-size: 15pt;}
+</style>
 
 {{ form.errors }}
 

@@ -8,19 +8,20 @@ from django.db.models import F
 from forms import *
 from django.contrib import messages
 
-def dashboard(request):
-    qform = AddQuestionForm()
-    return render_to_response('dashboard.html',
-                              {'user' : request.user,
-                               'form' : qform},
-                              context_instance=RequestContext(request))
 
 def home(request):
-    if request.user:
-        return dashboard(request)
+    if request.user.is_authenticated():
+        qform = AddQuestionForm()            
+        return render_to_response('dashboard.html',
+                                  {'user' : request.user,
+                                  'form' : qform},
+                                  context_instance=RequestContext(request))
+    
+
     return render_to_response('index.html',
                               {'user' : request.user},
                               context_instance=RequestContext(request))
+
 
 def feedback(request, shortname):
     try:
@@ -32,7 +33,7 @@ def feedback(request, shortname):
         except Exception as e:
             print e
             messages.error(request, "couldn't find the question you are giving feedback to")
-            return home(request)
+            return HttpResponseRedirect('/')
 
     if request.method == 'POST' and q:
         post = dict(request.POST)
@@ -62,7 +63,8 @@ def feedback(request, shortname):
                               {'fform' : fform,
                                'sform' : sform,
                                'mform' : mform,
-                               'q' : q },
+                               'q' : q,
+                               'user' : request.user },
                               context_instance=RequestContext(request))
 
 @login_required
