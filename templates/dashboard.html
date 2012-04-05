@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Hi {{ user.username }}!
+
+{% for q in user.question_set.all %}
+<div>
+<a href="/moose/question/{{q.pk}}/">Question {{ q.pk}}</a>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -8,7 +8,11 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'moose.views.home', name='home'),
     url(r'^feedback/$', 'moose.views.feedback', name='feedback'),
-    # url(r'^moose/', include('moose.foo.urls')),
+    url(r'^feedback/(\w+)/$', 'moose.views.feedback', name='feedback'),
+    url(r'^question/$', 'moose.views.question', name='question'),
+    url(r'^question/(\w+)/$', 'moose.views.question', name='question'),
+    url(r'^dashboard/$', 'moose.views.dashboard', name='dashboard'),    
+    # url(r'^moose/', include('moose.foo.urlsax')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

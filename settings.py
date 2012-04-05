@@ -120,6 +120,10 @@ TEMPLATE_DIRS = TEMPLATE_DIRS or (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
+)
+
 INSTALLED_APPS = (
     'registration',
     'emailusernames',
@@ -164,3 +168,6 @@ LOGGING = {
     }
 }
 
+
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

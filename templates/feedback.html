@@ -1,21 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html> <head>
-<title>Send Feedback</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block content %}
 <h1>Send Feedback</h1>
 
-<form>
 
-<p>Dear <input/>,</p>
+<form action="/moose/feedback/{{q.pk}}/" method="post">
+{% csrf_token %}
+<p>Dear {{ q.user.full_name }},</p>
+<p>In response to your question, {{ q.question }}</p>
 <p><textarea rows=5 cols=60></textarea></p>
+<p>Best regards, <input/></p>
 <p><button>Send</button></p>
 
 </form>
 
 
-<hr>
-<address></address>
-<!-- hhmts start -->Last modified: Wed Apr  4 14:03:14 EDT 2012 <!-- hhmts end -->
-</body> </html>
+
+{% endblock %}
