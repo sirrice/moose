@@ -4,6 +4,8 @@
 
 Hi {{ user.username }}!
 
+<h1><a href="/moose/question/">Add Question</a></h1>
+
 {% for q in user.question_set.all %}
 <div>
 <a href="/moose/question/{{q.pk}}/">Question {{ q.pk}}</a>

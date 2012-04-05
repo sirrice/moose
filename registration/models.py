@@ -10,7 +10,7 @@ from django.db import transaction
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from emailusernames.utils import create_user,
+from emailusernames.utils import create_user
 
 try:
     from django.utils.timezone import now as datetime_now

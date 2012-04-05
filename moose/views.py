@@ -23,21 +23,23 @@ def feedback(request, qid=None):
         q = None
 
     if request.method == 'POST' and q:
-        post = request.POST
-        post['question'] = q
+        post = dict(request.POST)
+        post['question'] = q.pk
         form = AddFeedbackForm(post)
         if form.is_valid():
             form.save()
             messages.success(request, "added feedback successfully!")
+        else:
+            messages.error(request, "did not validate form correctly")
     else:
-        form = AddFeedbackForm()
+        form = AddFeedbackForm({'question' : q})
     return render_to_response('feedback.html',
                               {'form' : form,
                                'q' : q },
                               context_instance=RequestContext(request))
 
-def question(request, qid):
-    if request.method == 'GET':
+def question(request, qid=None):
+    if request.method == 'GET' and qid is not None:
         try:
             q = Question.objects.get(pk=qid)
             if q.user == request.user:

@@ -6,13 +6,16 @@
 
 <form action="/moose/feedback/{{q.pk}}/" method="post">
 {% csrf_token %}
-<p>Dear {{ q.user.full_name }},</p>
-<p>In response to your question, {{ q.question }}</p>
-<p><textarea rows=5 cols=60></textarea></p>
-<p>Best regards, <input/></p>
-<p><button>Send</button></p>
+<p>Dear {{ q.user.email }},</p>
+<p>In response to your question, <span class='question'>{{ q.question }}</span></p>
+<p><textarea rows=5 cols=60 name="text"></textarea></p>
+<p>Best regards, <input name="sender_name" /></p>
+<input type="hidden" name="from_sender" value="1" />
+<p><input type="submit" value="Send"/></p>
 
 </form>
+
+{{ form.errors }}
 
 
 
