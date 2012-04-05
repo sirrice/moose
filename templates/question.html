@@ -4,33 +4,6 @@
 
 Hi {{ user.username }}!
 
-
-[name] asked:
-<br/>
-<div class="bigq">
-	How is my CHI 2012 talk?<br/>a.k.a. {{q.pk}} {{q.question}}
-</div>
-<div class="smallq">
-	Any feedback welcome: high-level approach to work, specific questions, methodology, slide design, etc. Thanks!
-</div>
-
-
-<br/><br/>
-Instructions to anonymous responder here.
-<br/>
-Keep it polite, constructive, etc.
-<br/>
-Explanation of process?
-<br/><br/>
-<center>
-<textarea rows="10" cols="100" name="feedback">Feedback goes here!</textarea>
-</center>
-
-<br/><br/>
-
-<input type="button" value="Preview Feedback"/>
-
-
 {% for f in q.feedback_set.all %}
 <div>{{f.text}}</div>
 {% endfor %}
