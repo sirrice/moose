@@ -9,12 +9,12 @@ import settings
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'moose.views.home', name='home'),
+    url(r'^$', 'moose.views.home', name='home'),
     url(r'^moose/a/', include('registration.backends.email.urls')),
     url(r'^moose/', include('moose.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.ASSETS_ROOT}),
-    url('(%s)' % (SHORTNAME_PATTERN), 'moose.views.feedback', name='feedback'),
+    url('(%s)/$' % (SHORTNAME_PATTERN), 'moose.views.feedback', name='feedback'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

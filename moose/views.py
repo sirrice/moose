@@ -9,8 +9,10 @@ from forms import *
 from django.contrib import messages
 
 def dashboard(request):
+    qform = AddQuestionForm()
     return render_to_response('dashboard.html',
-                              {'user' : request.user},
+                              {'user' : request.user,
+                               'form' : qform},
                               context_instance=RequestContext(request))
 
 def home(request):

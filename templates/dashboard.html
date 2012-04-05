@@ -48,6 +48,17 @@
 </div>
 
 <div id="right">
+<h2 class="col">Add a question</h2>
+<form action="/moose/question/" method='post'>
+{% csrf_token %}
+{{ form.question }}
+{{ form.text }}
+{{ form.shortname }}
+<input type="button" value="Preview"/>
+</form>
+
+
+<!--
 <h2 class="col">Ask a New Question</h2>
 
 <form name="ask">
@@ -58,10 +69,8 @@
 <input type="button" name="preview" value="Preview">
 </form>
 
-<h1><a href="/moose/question/">Add Question</a></h1>
-
 <br/>
-
+-->
 
 </div>
 

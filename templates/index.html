@@ -2,6 +2,24 @@
 
 {% block content %}
 
+<script type="text/javascript">
+
+function register()
+{
+	//replace signin / register buttons with sign up fields
+	$signup = 'Confirm Password<br/>'
+		+ '<input type="password" size="30" name="pwd2"/>'
+		+ '<br/><br/>'
+		+ 'Name<br/>'
+		+ '<input type="text" size="30" name="fullname"/>'
+		+ '<br/><br/>'
+		+ '<input type="button" name="signup" value="Sign Up"/>';
+	
+	$('span#signin').empty().html($signup);	
+}
+
+</script>
+
 <div id="ileft">
 <h2 class="col">1. Pose a question</h2>
 <p class="inst">
@@ -15,7 +33,7 @@
 	image: hello everyone visit this
 	</p>
 <br/>
-<h2 class="col">3. Receive feedback</h2>
+<h2 class="col">3. Receive anonymous feedback</h2>
 	<p class="inst">
 	profit!
 	</p>
@@ -27,7 +45,7 @@
 </div>
 
 <div id="iright">
-<h2>Sign up now</h2>
+<h2>Sign in</h2>
 <br/>
 
 <form name="signup">
@@ -38,16 +56,14 @@ E-mail<br/>
 Password<br/>
 <input type="password" size="30" name="pwd1"/>
 <br/><br/>
-Retype Password<br/>(if creating an account)<br/>
-<input type="password" size="30" name="pwd2"/>
-<br/><br/>
-Name (if creating an account)<br/>
-<input type="text" size="30" name="fullname"/>
-<br/><br/>
-<br/><br/>
-<input type="button" name="signin" value="Sign In">
-</form>
 
+<span id="signin">
+<input type="button" name="signin" value="Sign In"> <a href="">(forgot password?)</a>
+<br/><br/>
+Not a member? <a href="#" onClick="register()">Register</a>
+</span>
+
+</form>
 
 </div>
 
