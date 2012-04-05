@@ -3,6 +3,10 @@ from django.db import models
 
 import re
 
+#receiver is person who asked question
+#sender is person sending feedback
+#reword and refactor them :)
+
 SHORTNAME_PATTERN = "^[a-z\-\_1-9]+"
 SHORTNAME_REGEX = re.compile(SHORTNAME_PATTERN)
 class Question(models.Model):
@@ -31,3 +35,4 @@ class Message(models.Model):
     feedback = models.ForeignKey(Feedback)
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    from_sender = models.BooleanField()
