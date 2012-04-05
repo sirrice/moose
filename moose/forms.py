@@ -32,7 +32,7 @@ class AddSenderForm(forms.ModelForm):
 
     def clean(self):
         cd = super(AddSenderForm, self).clean()
-
+        print cd
         email = cd['email'].strip()
         if email:
             try:

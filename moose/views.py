@@ -28,16 +28,30 @@ def feedback(request, qid=None):
     if request.method == 'POST' and q:
         post = dict(request.POST)
         post['question'] = q.pk
-        form = AddFeedbackForm(post)
-        if form.is_valid():
-            form.save()
+        fform = AddFeedbackForm(post, prefix='f')
+        sform = AddSenderForm(post, prefix='s')
+        mform = AddMessageForm(post, prefix='m')
+
+        if sform.is_valid() and fform.is_valid() and mform.is_valid():
+            s = sform.save(commit=False)
+            f = fform.save(commit=False)
+            m = mform.save(commit=False)
+            f.sender = s
+            m.feedback = f
+            s.save()
+            f.save()
+            m.save()
             messages.success(request, "added feedback successfully!")
         else:
             messages.error(request, "did not validate form correctly")
     else:
-        form = AddFeedbackForm({'question' : q})
+        fform = AddFeedbackForm({'question' : q}, prefix='f')
+        sform = AddSenderForm(prefix='s')
+        mform = AddMessageForm(prefix='m')
     return render_to_response('feedback.html',
-                              {'form' : form,
+                              {'fform' : fform,
+                               'sform' : sform,
+                               'mform' : mform,
                                'q' : q },
                               context_instance=RequestContext(request))
 
