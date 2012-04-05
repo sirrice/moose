@@ -16,19 +16,19 @@ Explanation of process?
 </div>
 
 
-<form class="form-horizontal" action="/{{q.pk}}/" method="post">
+<form class="form-horizontal" action="/{{q.pk}}/" method="POST">
 {% csrf_token %}
 <p>Dear {{ q.user.email }},</p>
-<div><textarea rows=10 name="f-text">Feedback goes here!</textarea></div>
-<p>Best regards, {{ sform.email }}</p>
+<div><textarea rows=10 name="text">Feedback goes here!</textarea></div>
+<p>Best regards, <input type="text" name="s-email" /></p>
 <p><input class="btn" type="submit" value="Preview Feedback"/></p>
-
+ 
 </form>
 <style>
 form textarea { width: 98%; font-size: 15pt;}
 </style>
 
-{{ form.errors }}
+
 
 
 

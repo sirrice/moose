@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from moose.models import SHORTNAME_PATTERN
-
+from moose.views import *
 import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^moose/', include('moose.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.ASSETS_ROOT}),
-    url('(%s)/$' % (SHORTNAME_PATTERN), 'moose.views.feedback', name='feedback'),
+    url('(%s)/$' % (SHORTNAME_PATTERN), feedback, name='feedback'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

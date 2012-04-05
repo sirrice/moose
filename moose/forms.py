@@ -27,29 +27,36 @@ class AddFeedbackForm(forms.ModelForm):
         exclude = ['date', 'sender']
 
 class AddSenderForm(forms.ModelForm):
+    email = forms.EmailField(required=False)
+    status = forms.CharField(required=False)
+    
     class Meta:
         model = Sender
 
-    def clean(self):
+    def save(self):
+        print "save!", self.cleaned_data
         cd = self.cleaned_data
-        print cd
-        email = cd['s-email'].strip()
+        email = cd['email'].strip()
         if email:
             try:
                 u = User.objects.get(email=email)
-                cd['s-user'] = u
-                cd['s-status'] = 'user'
+                cd['user'] = u
+                cd['status'] = 'user'
             except:
                 pass
-            cd['s-email'] = email
-            cd['s-status'] = 'email'
+            cd['email'] = email
+            cd['status'] = 'email'
         else:
-            cd['s-email'] = None
-            cd['s-status'] = 'anon'
+            cd['email'] = None
+            cd['status'] = 'anon'
         
         return cd
 
 class AddMessageForm(forms.ModelForm):
+    feedback = forms.ModelChoiceField(queryset=Feedback.objects.all(),
+                                      widget=forms.HiddenInput(), required=False,
+                                      validators=[])
+    
     class Meta:
         model = Message
         exclude = ['date']

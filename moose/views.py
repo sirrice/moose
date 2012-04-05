@@ -32,41 +32,42 @@ def feedback(request, shortname):
         try:
             q = Question.objects.get(pk=int(shortname))         # maybe its an id!
         except Exception as e:
-            print e
+            print shortname, e
             messages.error(request, "couldn't find the question you are giving feedback to")
             return HttpResponseRedirect('/')
 
     if request.method == 'POST' and q:
-        post = dict(request.POST)
-        post['question'] = q.pk
+        # I don't know how to get the sender/message forms to validate, so fuck it.  This is in-house
+        post = dict([(k, v[0] if isinstance(v,list) else v) for k, v in request.POST.items()])
 
-        fform = AddFeedbackForm(post, prefix='f')
-        sform = AddSenderForm(post, prefix='s')
-        mform = AddMessageForm(post, prefix='m')
-        print sform.data
-        sform.is_valid()
+        text = post.get('text', '').strip()
+        email = post.get('s-email', 'g')
+        sender_user = None
+        if email:
+            try:
+                sender_user = User.objects.get(email=email)
+                status = 'user'
+            except:
+                pass
+            status = 'email'
+        else:
+            status = 'anon'
 
-        if sform.is_valid() and fform.is_valid() and mform.is_valid():
-            s = sform.save(commit=False)
-            f = fform.save(commit=False)
-            m = mform.save(commit=False)
-            f.sender = s
-            m.feedback = f
-            s.save()
-            f.save()
+        s = Sender(user=sender_user, email=email, status=status)
+        s.save()
+
+        f = Feedback(sender = s, question=q)
+        f.save()
+        print "text", text
+        if text:
+            m = Message(feedback=f, text=text)
             m.save()
-            messages.success(request, "added feedback successfully!")
+            messages.success(request, "added feedback successfully!")                
         else:
             messages.error(request, "did not validate form correctly")
-    else:
-        fform = AddFeedbackForm({'question' : q}, prefix='f')
-        sform = AddSenderForm(prefix='s')
-        mform = AddMessageForm(prefix='m')
+
     return render_to_response('feedback.html',
-                              {'fform' : fform,
-                               'sform' : sform,
-                               'mform' : mform,
-                               'q' : q,
+                              {'q' : q,
                                'user' : request.user,
                                'hide_toolbar' : True },
                               context_instance=RequestContext(request))
