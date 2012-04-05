@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="ileft">
+<h2 class="col">1. Pose a question</h2>
+<p class="inst">
+	one-off: "What do you think of this talk?",
+	<br/>
+	or ongoing: "How is my hair?"
+</p>
+<br/>
+<h2 class="col">2. Give out the URL</h2>
+	<p class="inst">
+	image: hello everyone visit this
+	</p>
+<br/>
+<h2 class="col">3. Receive feedback</h2>
+	<p class="inst">
+	profit!
+	</p>
+<br/>
+</div>
+
+<div id="imiddle">
+	&nbsp;
+</div>
+
+<div id="iright">
+<h2>Sign up now</h2>
+<br/>
+
+<form name="signup">
+
+E-mail<br/>
+<input type="text" size="30" name="email"/>
+<br/><br/>
+Password<br/>
+<input type="password" size="30" name="pwd1"/>
+<br/><br/>
+Retype Password<br/>(if creating an account)<br/>
+<input type="password" size="30" name="pwd2"/>
+<br/><br/>
+Name (if creating an account)<br/>
+<input type="text" size="30" name="fullname"/>
+<br/><br/>
+<br/><br/>
+<input type="button" name="signin" value="Sign In">
+</form>
+
+
+</div>
+
+<div style="clear:both;"></div>
+
+{% endblock %}
