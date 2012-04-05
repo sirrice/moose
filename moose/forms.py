@@ -31,21 +31,21 @@ class AddSenderForm(forms.ModelForm):
         model = Sender
 
     def clean(self):
-        cd = super(AddSenderForm, self).clean()
+        cd = self.cleaned_data
         print cd
-        email = cd['email'].strip()
+        email = cd['s-email'].strip()
         if email:
             try:
                 u = User.objects.get(email=email)
-                cd['user'] = u
-                cd['status'] = 'user'
+                cd['s-user'] = u
+                cd['s-status'] = 'user'
             except:
                 pass
-            cd['email'] = email
-            cd['status'] = 'email'
+            cd['s-email'] = email
+            cd['s-status'] = 'email'
         else:
-            cd['email'] = None
-            cd['status'] = 'anon'
+            cd['s-email'] = None
+            cd['s-status'] = 'anon'
         
         return cd
 
