@@ -1,4 +1,5 @@
 import random
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext, loader
@@ -38,6 +39,7 @@ def feedback(request, qid=None):
                                'q' : q },
                               context_instance=RequestContext(request))
 
+@login_required
 def question(request, qid=None):
     if request.method == 'GET' and qid is not None:
         try:
@@ -53,14 +55,14 @@ def question(request, qid=None):
             q = None
         return home(request)
 
-        
     if request.method == 'POST':
         form = AddQuestionForm(request.POST)
         if form.is_valid():
-            form.save()
+            q = form.save(commit=False)
+            q.user = request.user
+            q.save()
             messages.success(request, "added your question!")
-            # save it
-            pass
+            return redirect('home')
     else:
         form = AddQuestionForm()
     return render_to_response('addquestion.html',
