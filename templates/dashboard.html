@@ -7,17 +7,18 @@
 <div class="span6">
 	<h2 class="col">Open Questions</h2>
 
-	{% for q in user.question_set.all %}
-	<div class="row" style="margin-bottom: 1em">
-		<div class="span4">
-			<a href="/moose/question/{{q.pk}}">{{q.question}}</a>
-			<div class="metadata">asked on: {{q.date}}</div>
+		{% for q in user.question_set.all %}
+		<div class="row" style="margin-bottom: 1em">
+			<div class="span4">
+				<a href="/moose/question/{{q.pk}}">{{q.question}}</a>
+				<div class="metadata">asked on: {{q.date}}</div>
+			</div>
+			<div class="span2" style="text-align: right;">
+				no replies
+			</div>
 		</div>
-		<div class="span2" style="text-align: right;">
-			no replies
-		</div>
-	</div>
-	{% endfor %}
+		{% endfor %}
+
 </div>
 
 
@@ -55,55 +56,5 @@
 </style>
 
 </div>
-
-<!--
-<div id="left">
-<h2 class="col">Open Questions</h2>
-
-	<div class="q">
-		<a href="">How was my CHI 2012 talk?</a>
-	</div>
-	<div class="counter">
-		32<br>replies
-	</div>
-	<div class="metadata">
-		last updated: 4 Apr 2012. asked on: 4 Apr 2012
-	</div>
-	
-	<br/><br/><br/>
-	
-	<div class="q">
-		<a href="">How did my hair look today?</a>
-	</div>
-	<div class="counter">
-		542<br>replies
-	</div>
-	<div class="metadata">
-		last updated: 4 Apr 2012. asked on: 4 Apr 2012
-	</div>
-	
-
-	
-</div>
-
-<div id="middle">
-	&nbsp;
-</div>
-
-<div id="right">
--->
-<!--
-<h2 class="col">Ask a New Question</h2>
-
-<form name="ask">
-<input type="text" name="question" size="70"/>
-<br/><br/>
-<textarea name="details" rows="5" cols="50"/>Any extra details or clarifications here</textarea>
-<br/><br/>
-<input type="button" name="preview" value="Preview">
-</form>
-
-<br/>
--->
 
 {% endblock %}
