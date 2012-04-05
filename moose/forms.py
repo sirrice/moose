@@ -9,6 +9,8 @@ class AddQuestionForm(forms.ModelForm):
 
     def clean_shortname(self):
          sname = self.cleaned_data['shortname'].strip()
+         if not SHORTNAME_REGEX.match(sname):
+             raise forms.ValidationError("We only allow lowercase letters, numbers, -, and _ in our URLs.")
          try:
              q = Question.objects.get(shortname = sname)
          except:
@@ -16,8 +18,6 @@ class AddQuestionForm(forms.ModelForm):
          if q:
              raise forms.ValidationError("That name is already in use.  Try another?")
          return sname
-            
-
             
 
 

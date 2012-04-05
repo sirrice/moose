@@ -18,9 +18,9 @@ def home(request):
                               {'user' : request.user},
                               context_instance=RequestContext(request))
 
-def feedback(request, qid=None):
+def feedback(request, shortname):
     try:
-        q = Question.objects.get(pk=qid)
+        q = Question.objects.get(shortname=shortname)
     except:
         messages.error(request, "couldn't find the question you are giving feedback to")
         q = None

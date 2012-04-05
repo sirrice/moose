@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-from emailusernames.forms import EmailAuthenticationForm
+from moose.models import SHORTNAME_PATTERN
 
 import settings
 
@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     url(r'^moose/a/', include('registration.backends.email.urls')),
     url(r'^moose/', include('moose.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': settings.ASSETS_ROOT,
-        })
+            'document_root': settings.ASSETS_ROOT}),
+    url('(%s)' % (SHORTNAME_PATTERN), 'moose.views.feedback', name='feedback'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
