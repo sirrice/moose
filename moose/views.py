@@ -14,7 +14,9 @@ def dashboard(request):
                               context_instance=RequestContext(request))
 
 def home(request):
-    return dashboard(request)
+    return render_to_response('index.html',
+                              {'user' : request.user},
+                              context_instance=RequestContext(request))
 
 def feedback(request, qid=None):
     try:

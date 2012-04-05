@@ -1,7 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Send Feedback</h1>
+
+[name] asked:
+<br/>
+<div class="bigq">
+	How is my CHI 2012 talk?
+</div>
+<div class="smallq">
+	Any feedback welcome: high-level approach to work, specific questions, methodology, slide design, etc. Thanks!
+</div>
+
+
+<br/><br/>
+Instructions to anonymous responder here.
+<br/>
+Keep it polite, constructive, etc.
+<br/>
+Explanation of process?
+<br/><br/>
+<center>
+<textarea rows="10" cols="100" name="feedback">Feedback goes here!</textarea>
+</center>
+
+<br/><br/>
+
+<input type="button" value="Preview Feedback"/>
+
+</div>
 
 
 <form action="/moose/feedback/{{q.pk}}/" method="post">
