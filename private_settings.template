@@ -12,4 +12,4 @@ DATABASES = {
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '230p9g340py9g,34p0[9"#$Y<PY<$5y,43y,3$y3'
+SECRET_KEY = ''
