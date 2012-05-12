@@ -1,3 +1,8 @@
+# What
+
+Moose is an app that lets people send anonymous feedback to other.  The key application is use during talks so that participants can anonymously send feedback to the presenter.
+
+
 # To Run
 
     make runserver
